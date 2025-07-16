@@ -1,16 +1,28 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { CheckCircle, Star, TrendingUp, Clock, Users } from "lucide-react"
+import { EditableText } from "@/components/ui/editable-text"
+import { ContentControls } from "@/components/ui/content-controls"
 
 export default function Recommendations() {
   return (
     <div className="space-y-8">
+      {/* Content Controls */}
+      <ContentControls className="flex justify-center" />
+      
       {/* Header */}
       <div className="text-center">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">המלצות סופיות ותוכנית יישום</h2>
-        <p className="text-lg text-gray-600 max-w-4xl mx-auto">
-          על בסיס המחקר המקיף, אלו ההמלצות שלנו למשטרת ישראל ליישום אווטארים אינטראקטיביים
-        </p>
+        <EditableText 
+          initialValue="המלצות סופיות ותוכנית יישום"
+          storageKey="recommendations-title"
+          className="text-3xl font-bold text-gray-900 mb-4 block"
+        />
+        <EditableText 
+          initialValue="על בסיס המחקר המקיף, אלו ההמלצות שלנו למשטרת ישראל ליישום אווטארים אינטראקטיביים"
+          storageKey="recommendations-description"
+          className="text-lg text-gray-600 max-w-4xl mx-auto block"
+          multiline={true}
+        />
       </div>
 
       {/* Main Recommendation */}
@@ -19,56 +31,104 @@ export default function Recommendations() {
           <div className="flex items-center space-x-3 space-x-reverse">
             <Star className="h-8 w-8 text-green-600" />
             <div>
-              <CardTitle className="text-2xl text-green-800">המלצה מרכזית</CardTitle>
-              <CardDescription className="text-green-600">הגישה המומלצת למשטרת ישראל</CardDescription>
+              <CardTitle className="text-2xl text-green-800">
+                <EditableText 
+                  initialValue="המלצה מרכزית"
+                  storageKey="main-recommendation-title"
+                  className="text-2xl text-green-800"
+                />
+              </CardTitle>
+              <CardDescription className="text-green-600">
+                <EditableText 
+                  initialValue="הגישה המומלצת למשטרת ישראל"
+                  storageKey="main-recommendation-description"
+                  className="text-green-600"
+                />
+              </CardDescription>
             </div>
           </div>
         </CardHeader>
         <CardContent>
           <div className="grid lg:grid-cols-2 gap-6">
             <div>
-              <h3 className="text-xl font-semibold text-green-800 mb-4">התחלה עם פלטפורמת SaaS</h3>
+              <EditableText 
+                initialValue="התחלה עם פלטפורמת SaaS"
+                storageKey="saas-start-title"
+                className="text-xl font-semibold text-green-800 mb-4 block"
+              />
               <ul className="space-y-3">
                 <li className="flex items-start space-x-2 space-x-reverse">
                   <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
-                  <span>
-                    <strong>Soul Machines Digital People</strong> לפריסה מלאה
-                  </span>
+                  <EditableText 
+                    initialValue="Soul Machines Digital People לפריסה מלאה"
+                    storageKey="saas-item1"
+                    className="inline"
+                  />
                 </li>
                 <li className="flex items-start space-x-2 space-x-reverse">
                   <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
-                  <span>
-                    <strong>D-ID Digital Avatars</strong> למעבר הדרגתי או פיילוט
-                  </span>
+                  <EditableText 
+                    initialValue="D-ID Digital Avatars למעבר הדרגתי או פיילוט"
+                    storageKey="saas-item2"
+                    className="inline"
+                  />
                 </li>
                 <li className="flex items-start space-x-2 space-x-reverse">
                   <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
-                  <span>יישום מהיר תוך 1-3 חודשים</span>
+                  <EditableText 
+                    initialValue="יישום מהיר תוך 1-3 חודשים"
+                    storageKey="saas-item3"
+                    className="inline"
+                  />
                 </li>
                 <li className="flex items-start space-x-2 space-x-reverse">
                   <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
-                  <span>סיכון נמוך והשקעה ראשונית קטנה</span>
+                  <EditableText 
+                    initialValue="סיכון נמוך והשקעה ראשונית קטנה"
+                    storageKey="saas-item4"
+                    className="inline"
+                  />
                 </li>
               </ul>
             </div>
             <div>
-              <h3 className="text-xl font-semibold text-green-800 mb-4">מעבר עתידי למיקרו-שירותים</h3>
+              <EditableText 
+                initialValue="מעבר עתידי למיקרו-שירותים"
+                storageKey="microservices-title"
+                className="text-xl font-semibold text-green-800 mb-4 block"
+              />
               <ul className="space-y-3">
                 <li className="flex items-start space-x-2 space-x-reverse">
                   <TrendingUp className="h-5 w-5 text-green-600 mt-0.5" />
-                  <span>לאחר הוכחת היתכנות והצלחה</span>
+                  <EditableText 
+                    initialValue="לאחר הוכחת היתכנות והצלחה"
+                    storageKey="microservices-item1"
+                    className="inline"
+                  />
                 </li>
                 <li className="flex items-start space-x-2 space-x-reverse">
                   <TrendingUp className="h-5 w-5 text-green-600 mt-0.5" />
-                  <span>שקילת NVIDIA ACE או Microsoft Azure</span>
+                  <EditableText 
+                    initialValue="שקילת NVIDIA ACE או Microsoft Azure"
+                    storageKey="microservices-item2"
+                    className="inline"
+                  />
                 </li>
                 <li className="flex items-start space-x-2 space-x-reverse">
                   <TrendingUp className="h-5 w-5 text-green-600 mt-0.5" />
-                  <span>התאמה מלאה לצרכי המשטרה</span>
+                  <EditableText 
+                    initialValue="התאמה מלאה לצרכי המשטרה"
+                    storageKey="microservices-item3"
+                    className="inline"
+                  />
                 </li>
                 <li className="flex items-start space-x-2 space-x-reverse">
                   <TrendingUp className="h-5 w-5 text-green-600 mt-0.5" />
-                  <span>חיסכון לטווח ארוך</span>
+                  <EditableText 
+                    initialValue="חיסכון לטווח ארוך"
+                    storageKey="microservices-item4"
+                    className="inline"
+                  />
                 </li>
               </ul>
             </div>
@@ -79,8 +139,20 @@ export default function Recommendations() {
       {/* Implementation Timeline */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl">תוכנית יישום מפורטת</CardTitle>
-          <CardDescription>לוח זמנים מומלץ ליישום הדרגתי של אווטארים אינטראקטיביים</CardDescription>
+          <CardTitle className="text-2xl">
+            <EditableText 
+              initialValue="תוכנית יישום מפורטת"
+              storageKey="implementation-timeline-title"
+              className="text-2xl"
+            />
+          </CardTitle>
+          <CardDescription>
+            <EditableText 
+              initialValue="לוח זמנים מומלץ ליישום הדרגתי של אווטארים אינטראקטיביים"
+              storageKey="implementation-timeline-description"
+              className="inline"
+            />
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-6">
@@ -91,24 +163,78 @@ export default function Recommendations() {
               </div>
               <div className="flex-1">
                 <div className="flex items-center space-x-2 space-x-reverse mb-2">
-                  <h3 className="text-lg font-semibold">שלב פיילוט</h3>
-                  <Badge variant="outline">3-6 חודשים</Badge>
+                  <EditableText 
+                    initialValue="שלב פיילוט"
+                    storageKey="phase1-title"
+                    className="text-lg font-semibold inline"
+                  />
+                  <Badge variant="outline">
+                    <EditableText 
+                      initialValue="3-6 חודשים"
+                      storageKey="phase1-duration"
+                      className="inline"
+                    />
+                  </Badge>
                 </div>
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <h4 className="font-medium mb-2">מטרות:</h4>
+                    <EditableText 
+                      initialValue="מטרות:"
+                      storageKey="phase1-goals-title"
+                      className="font-medium mb-2 block"
+                    />
                     <ul className="text-sm space-y-1">
-                      <li>• בדיקת היתכנות טכנית</li>
-                      <li>• הערכת קבלת הציבור</li>
-                      <li>• מדידת יעילות התהליך</li>
+                      <li>
+                        <EditableText 
+                          initialValue="• בדיקת היתכנות טכנית"
+                          storageKey="phase1-goal1"
+                          className="inline"
+                        />
+                      </li>
+                      <li>
+                        <EditableText 
+                          initialValue="• הערכת קבלת הציבור"
+                          storageKey="phase1-goal2"
+                          className="inline"
+                        />
+                      </li>
+                      <li>
+                        <EditableText 
+                          initialValue="• מדידת יעילות התהליך"
+                          storageKey="phase1-goal3"
+                          className="inline"
+                        />
+                      </li>
                     </ul>
                   </div>
                   <div>
-                    <h4 className="font-medium mb-2">יישום:</h4>
+                    <EditableText 
+                      initialValue="יישום:"
+                      storageKey="phase1-implementation-title"
+                      className="font-medium mb-2 block"
+                    />
                     <ul className="text-sm space-y-1">
-                      <li>• תחנה אחת נבחרת</li>
-                      <li>• D-ID או Ravatar</li>
-                      <li>• תלונות פשוטות בלבד</li>
+                      <li>
+                        <EditableText 
+                          initialValue="• תחנה אחת נבחרת"
+                          storageKey="phase1-impl1"
+                          className="inline"
+                        />
+                      </li>
+                      <li>
+                        <EditableText 
+                          initialValue="• D-ID או Ravatar"
+                          storageKey="phase1-impl2"
+                          className="inline"
+                        />
+                      </li>
+                      <li>
+                        <EditableText 
+                          initialValue="• תלונות פשוטות בלבד"
+                          storageKey="phase1-impl3"
+                          className="inline"
+                        />
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -122,24 +248,78 @@ export default function Recommendations() {
               </div>
               <div className="flex-1">
                 <div className="flex items-center space-x-2 space-x-reverse mb-2">
-                  <h3 className="text-lg font-semibold">הרחבה מוגבלת</h3>
-                  <Badge variant="outline">6-12 חודשים</Badge>
+                  <EditableText 
+                    initialValue="הרחבה מוגבלת"
+                    storageKey="phase2-title"
+                    className="text-lg font-semibold inline"
+                  />
+                  <Badge variant="outline">
+                    <EditableText 
+                      initialValue="6-12 חודשים"
+                      storageKey="phase2-duration"
+                      className="inline"
+                    />
+                  </Badge>
                 </div>
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <h4 className="font-medium mb-2">מטרות:</h4>
+                    <EditableText 
+                      initialValue="מטרות:"
+                      storageKey="phase2-goals-title"
+                      className="font-medium mb-2 block"
+                    />
                     <ul className="text-sm space-y-1">
-                      <li>• הרחבה ל-3-5 תחנות</li>
-                      <li>• שיפור המערכת על בסיס משוב</li>
-                      <li>• הכשרת צוותים נוספים</li>
+                      <li>
+                        <EditableText 
+                          initialValue="• הרחבה ל-3-5 תחנות"
+                          storageKey="phase2-goal1"
+                          className="inline"
+                        />
+                      </li>
+                      <li>
+                        <EditableText 
+                          initialValue="• שיפור המערכת על בסיס משוב"
+                          storageKey="phase2-goal2"
+                          className="inline"
+                        />
+                      </li>
+                      <li>
+                        <EditableText 
+                          initialValue="• הכשרת צוותים נוספים"
+                          storageKey="phase2-goal3"
+                          className="inline"
+                        />
+                      </li>
                     </ul>
                   </div>
                   <div>
-                    <h4 className="font-medium mb-2">יישום:</h4>
+                    <EditableText 
+                      initialValue="יישום:"
+                      storageKey="phase2-implementation-title"
+                      className="font-medium mb-2 block"
+                    />
                     <ul className="text-sm space-y-1">
-                      <li>• אינטגרציה עם מערכות קיימות</li>
-                      <li>• הרחבת סוגי התלונות</li>
-                      <li>• שיפור תמיכה רב-לשונית</li>
+                      <li>
+                        <EditableText 
+                          initialValue="• אינטגרציה עם מערכות קיימות"
+                          storageKey="phase2-impl1"
+                          className="inline"
+                        />
+                      </li>
+                      <li>
+                        <EditableText 
+                          initialValue="• הרחבת סוגי התלונות"
+                          storageKey="phase2-impl2"
+                          className="inline"
+                        />
+                      </li>
+                      <li>
+                        <EditableText 
+                          initialValue="• שיפור תמיכה רב-לשונית"
+                          storageKey="phase2-impl3"
+                          className="inline"
+                        />
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -153,24 +333,78 @@ export default function Recommendations() {
               </div>
               <div className="flex-1">
                 <div className="flex items-center space-x-2 space-x-reverse mb-2">
-                  <h3 className="text-lg font-semibold">פריסה ארצית</h3>
-                  <Badge variant="outline">12+ חודשים</Badge>
+                  <EditableText 
+                    initialValue="פריסה ארצית"
+                    storageKey="phase3-title"
+                    className="text-lg font-semibold inline"
+                  />
+                  <Badge variant="outline">
+                    <EditableText 
+                      initialValue="12+ חודשים"
+                      storageKey="phase3-duration"
+                      className="inline"
+                    />
+                  </Badge>
                 </div>
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <h4 className="font-medium mb-2">מטרות:</h4>
+                    <EditableText 
+                      initialValue="מטרות:"
+                      storageKey="phase3-goals-title"
+                      className="font-medium mb-2 block"
+                    />
                     <ul className="text-sm space-y-1">
-                      <li>• פריסה לכל תחנות המשטרה</li>
-                      <li>• מעבר לפלטפורמה מתקדמת</li>
-                      <li>• אופטימיזציה מלאה</li>
+                      <li>
+                        <EditableText 
+                          initialValue="• פריסה לכל תחנות המשטרה"
+                          storageKey="phase3-goal1"
+                          className="inline"
+                        />
+                      </li>
+                      <li>
+                        <EditableText 
+                          initialValue="• מעבר לפלטפורמה מתקדמת"
+                          storageKey="phase3-goal2"
+                          className="inline"
+                        />
+                      </li>
+                      <li>
+                        <EditableText 
+                          initialValue="• אופטימיזציה מלאה"
+                          storageKey="phase3-goal3"
+                          className="inline"
+                        />
+                      </li>
                     </ul>
                   </div>
                   <div>
-                    <h4 className="font-medium mb-2">יישום:</h4>
+                    <EditableText 
+                      initialValue="יישום:"
+                      storageKey="phase3-implementation-title"
+                      className="font-medium mb-2 block"
+                    />
                     <ul className="text-sm space-y-1">
-                      <li>• Soul Machines או מיקרו-שירותים</li>
-                      <li>• כל סוגי התלונות</li>
-                      <li>• אינטגרציה מלאה</li>
+                      <li>
+                        <EditableText 
+                          initialValue="• Soul Machines או מיקרו-שירותים"
+                          storageKey="phase3-impl1"
+                          className="inline"
+                        />
+                      </li>
+                      <li>
+                        <EditableText 
+                          initialValue="• כל סוגי התלונות"
+                          storageKey="phase3-impl2"
+                          className="inline"
+                        />
+                      </li>
+                      <li>
+                        <EditableText 
+                          initialValue="• אינטגרציה מלאה"
+                          storageKey="phase3-impl3"
+                          className="inline"
+                        />
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -185,36 +419,84 @@ export default function Recommendations() {
         <Card className="text-center">
           <CardContent className="pt-6">
             <Clock className="h-12 w-12 text-blue-600 mx-auto mb-4" />
-            <h3 className="font-semibold text-lg mb-2">חיסכון בזמן</h3>
-            <p className="text-3xl font-bold text-blue-600 mb-2">60%</p>
-            <p className="text-sm text-gray-600">חיסכון בזמן חוקרים</p>
+            <EditableText 
+              initialValue="חיסכון בזמן"
+              storageKey="benefit-time-title"
+              className="font-semibold text-lg mb-2 block"
+            />
+            <EditableText 
+              initialValue="60%"
+              storageKey="benefit-time-percentage"
+              className="text-3xl font-bold text-blue-600 mb-2 block"
+            />
+            <EditableText 
+              initialValue="חיסכון בזמן חוקרים"
+              storageKey="benefit-time-description"
+              className="text-sm text-gray-600 block"
+            />
           </CardContent>
         </Card>
 
         <Card className="text-center">
           <CardContent className="pt-6">
             <Users className="h-12 w-12 text-green-600 mx-auto mb-4" />
-            <h3 className="font-semibold text-lg mb-2">שיפור שירות</h3>
-            <p className="text-3xl font-bold text-green-600 mb-2">24/7</p>
-            <p className="text-sm text-gray-600">זמינות מלאה</p>
+            <EditableText 
+              initialValue="שיפור שירות"
+              storageKey="benefit-service-title"
+              className="font-semibold text-lg mb-2 block"
+            />
+            <EditableText 
+              initialValue="24/7"
+              storageKey="benefit-service-value"
+              className="text-3xl font-bold text-green-600 mb-2 block"
+            />
+            <EditableText 
+              initialValue="זמינות מלאה"
+              storageKey="benefit-service-description"
+              className="text-sm text-gray-600 block"
+            />
           </CardContent>
         </Card>
 
         <Card className="text-center">
           <CardContent className="pt-6">
             <TrendingUp className="h-12 w-12 text-purple-600 mx-auto mb-4" />
-            <h3 className="font-semibold text-lg mb-2">יעילות</h3>
-            <p className="text-3xl font-bold text-purple-600 mb-2">3x</p>
-            <p className="text-sm text-gray-600">עיבוד תלונות מהיר יותר</p>
+            <EditableText 
+              initialValue="יעילות"
+              storageKey="benefit-efficiency-title"
+              className="font-semibold text-lg mb-2 block"
+            />
+            <EditableText 
+              initialValue="3x"
+              storageKey="benefit-efficiency-value"
+              className="text-3xl font-bold text-purple-600 mb-2 block"
+            />
+            <EditableText 
+              initialValue="עיבוד תלונות מהיר יותר"
+              storageKey="benefit-efficiency-description"
+              className="text-sm text-gray-600 block"
+            />
           </CardContent>
         </Card>
 
         <Card className="text-center">
           <CardContent className="pt-6">
             <CheckCircle className="h-12 w-12 text-orange-600 mx-auto mb-4" />
-            <h3 className="font-semibold text-lg mb-2">דיוק</h3>
-            <p className="text-3xl font-bold text-orange-600 mb-2">95%</p>
-            <p className="text-sm text-gray-600">דיוק בתיעוד</p>
+            <EditableText 
+              initialValue="דיוק"
+              storageKey="benefit-accuracy-title"
+              className="font-semibold text-lg mb-2 block"
+            />
+            <EditableText 
+              initialValue="95%"
+              storageKey="benefit-accuracy-value"
+              className="text-3xl font-bold text-orange-600 mb-2 block"
+            />
+            <EditableText 
+              initialValue="דיוק בתיעוד"
+              storageKey="benefit-accuracy-description"
+              className="text-sm text-gray-600 block"
+            />
           </CardContent>
         </Card>
       </div>
@@ -222,32 +504,104 @@ export default function Recommendations() {
       {/* Next Steps */}
       <Card className="border-2 border-blue-500 bg-blue-50">
         <CardHeader>
-          <CardTitle className="text-2xl text-blue-800">הצעדים הבאים</CardTitle>
+          <CardTitle className="text-2xl text-blue-800">
+            <EditableText 
+              initialValue="הצעדים הבאים"
+              storageKey="next-steps-title"
+              className="text-2xl text-blue-800"
+            />
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid md:grid-cols-3 gap-6">
             <div>
-              <h4 className="font-semibold text-blue-800 mb-3">מיידי (חודש הבא)</h4>
+              <EditableText 
+                initialValue="מיידי (חודש הבא)"
+                storageKey="immediate-steps-title"
+                className="font-semibold text-blue-800 mb-3 block"
+              />
               <ul className="space-y-2 text-sm">
-                <li>• אישור תקציב לפיילוט</li>
-                <li>• בחירת תחנה לפיילוט</li>
-                <li>• פנייה לספקים לקבלת הצעות</li>
+                <li>
+                  <EditableText 
+                    initialValue="• אישור תקציב לפיילוט"
+                    storageKey="immediate-step1"
+                    className="inline"
+                  />
+                </li>
+                <li>
+                  <EditableText 
+                    initialValue="• בחירת תחנה לפיילוט"
+                    storageKey="immediate-step2"
+                    className="inline"
+                  />
+                </li>
+                <li>
+                  <EditableText 
+                    initialValue="• פנייה לספקים לקבלת הצעות"
+                    storageKey="immediate-step3"
+                    className="inline"
+                  />
+                </li>
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold text-blue-800 mb-3">קצר טווח (3 חודשים)</h4>
+              <EditableText 
+                initialValue="קצר טווח (3 חודשים)"
+                storageKey="short-term-steps-title"
+                className="font-semibold text-blue-800 mb-3 block"
+              />
               <ul className="space-y-2 text-sm">
-                <li>• התקשרות עם ספק נבחר</li>
-                <li>• הכשרת צוות הפיילוט</li>
-                <li>• הטמעה בתחנה הנבחרת</li>
+                <li>
+                  <EditableText 
+                    initialValue="• התקשרות עם ספק נבחר"
+                    storageKey="short-term-step1"
+                    className="inline"
+                  />
+                </li>
+                <li>
+                  <EditableText 
+                    initialValue="• הכשרת צוות הפיילוט"
+                    storageKey="short-term-step2"
+                    className="inline"
+                  />
+                </li>
+                <li>
+                  <EditableText 
+                    initialValue="• הטמעה בתחנה הנבחרת"
+                    storageKey="short-term-step3"
+                    className="inline"
+                  />
+                </li>
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold text-blue-800 mb-3">בינוני טווח (6-12 חודשים)</h4>
+              <EditableText 
+                initialValue="בינוני טווח (6-12 חודשים)"
+                storageKey="medium-term-steps-title"
+                className="font-semibold text-blue-800 mb-3 block"
+              />
               <ul className="space-y-2 text-sm">
-                <li>• הערכת תוצאות הפיילוט</li>
-                <li>• תכנון הרחבה</li>
-                <li>• הכנת תקציב לפריסה רחבה</li>
+                <li>
+                  <EditableText 
+                    initialValue="• הערכת תוצאות הפיילוט"
+                    storageKey="medium-term-step1"
+                    className="inline"
+                  />
+                </li>
+                <li>
+                  <EditableText 
+                    initialValue="• תכנון הרחבה"
+                    storageKey="medium-term-step2"
+                    className="inline"
+                  />
+                </li>
+                <li>
+                  <EditableText 
+                    initialValue="• הכנת תקציב לפריסה רחבה"
+                    storageKey="medium-term-step3"
+                    className="inline"
+                  />
+                </li>
               </ul>
             </div>
           </div>

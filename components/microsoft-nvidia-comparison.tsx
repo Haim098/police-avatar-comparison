@@ -5,6 +5,8 @@ import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { CheckCircle, XCircle, AlertTriangle, Star, Shield, Zap, Globe } from "lucide-react"
 import { PDFButton } from "@/components/ui/pdf-button"
+import { EditableText } from "@/components/ui/editable-text"
+import { ContentControls } from "@/components/ui/content-controls"
 
 export default function MicrosoftNvidiaComparison() {
     const comparisonData = {
@@ -72,11 +74,21 @@ export default function MicrosoftNvidiaComparison() {
         <div className="space-y-8">
             {/* Header */}
             <div className="text-center">
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">השוואה מעמיקה: Microsoft vs NVIDIA</h2>
-                <p className="text-lg text-gray-600 max-w-4xl mx-auto">
-                    ניתוח מפורט של שני הפתרונות המובילים מחברות הענק לפיתוח אווטארים אינטראקטיביים
-                </p>
+                <EditableText 
+                    initialValue="השוואה מעמיקה: Microsoft vs NVIDIA"
+                    storageKey="comparison-title"
+                    className="text-3xl font-bold text-gray-900 mb-4 block"
+                />
+                <EditableText 
+                    initialValue="ניתוח מפורט של שני הפתרונות המובילים מחברות הענק לפיתוח אווטארים אינטראקטיביים"
+                    storageKey="comparison-description"
+                    className="text-lg text-gray-600 max-w-4xl mx-auto block"
+                    multiline={true}
+                />
             </div>
+            
+            {/* Content Controls */}
+            <ContentControls className="flex justify-center" />
 
             {/* Quick Overview Cards */}
             <div className="grid lg:grid-cols-2 gap-8">
@@ -86,9 +98,19 @@ export default function MicrosoftNvidiaComparison() {
                         <div className="flex items-center space-x-3 space-x-reverse">
                             <span className="text-4xl">{comparisonData.microsoft.logo}</span>
                             <div>
-                                <CardTitle className="text-2xl text-blue-800">{comparisonData.microsoft.name}</CardTitle>
+                                <CardTitle className="text-2xl text-blue-800">
+                                    <EditableText 
+                                        initialValue={comparisonData.microsoft.name}
+                                        storageKey="microsoft-name"
+                                        className="text-2xl text-blue-800 inline"
+                                    />
+                                </CardTitle>
                                 <CardDescription className="text-blue-600 text-lg">
-                                    {comparisonData.microsoft.subtitle}
+                                    <EditableText 
+                                        initialValue={comparisonData.microsoft.subtitle}
+                                        storageKey="microsoft-subtitle"
+                                        className="text-blue-600 text-lg inline"
+                                    />
                                 </CardDescription>
                             </div>
                         </div>
@@ -177,13 +199,21 @@ export default function MicrosoftNvidiaComparison() {
                                     <div>
                                         <h4 className="font-medium text-green-700 mb-3 flex items-center">
                                             <CheckCircle className="h-4 w-4 ml-1" />
-                                            יתרונות עיקריים
+                                            <EditableText 
+                                              initialValue="יתרונות עיקריים"
+                                              storageKey="microsoft-strengths-title"
+                                              className="inline"
+                                            />
                                         </h4>
                                         <ul className="text-sm space-y-2">
                                             {comparisonData.microsoft.strengths.map((strength, index) => (
                                                 <li key={index} className="flex items-start space-x-2 space-x-reverse">
                                                     <div className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
-                                                    <span>{strength}</span>
+                                                    <EditableText 
+                                                        initialValue={strength}
+                                                        storageKey={`microsoft-strength-${index}`}
+                                                        className="inline"
+                                                    />
                                                 </li>
                                             ))}
                                         </ul>
@@ -191,13 +221,21 @@ export default function MicrosoftNvidiaComparison() {
                                     <div>
                                         <h4 className="font-medium text-red-700 mb-3 flex items-center">
                                             <XCircle className="h-4 w-4 ml-1" />
-                                            חסרונות וסיכונים
+                                            <EditableText 
+                                              initialValue="חסרונות וסיכונים"
+                                              storageKey="microsoft-weaknesses-title"
+                                              className="inline"
+                                            />
                                         </h4>
                                         <ul className="text-sm space-y-2">
                                             {comparisonData.microsoft.weaknesses.map((weakness, index) => (
                                                 <li key={index} className="flex items-start space-x-2 space-x-reverse">
                                                     <div className="w-1.5 h-1.5 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
-                                                    <span>{weakness}</span>
+                                                    <EditableText 
+                                                        initialValue={weakness}
+                                                        storageKey={`microsoft-weakness-${index}`}
+                                                        className="inline"
+                                                    />
                                                 </li>
                                             ))}
                                         </ul>
@@ -219,13 +257,21 @@ export default function MicrosoftNvidiaComparison() {
                                     <div>
                                         <h4 className="font-medium text-green-700 mb-3 flex items-center">
                                             <CheckCircle className="h-4 w-4 ml-1" />
-                                            יתרונות עיקריים
+                                            <EditableText 
+                                              initialValue="יתרונות עיקריים"
+                                              storageKey="nvidia-strengths-title"
+                                              className="inline"
+                                            />
                                         </h4>
                                         <ul className="text-sm space-y-2">
                                             {comparisonData.nvidia.strengths.map((strength, index) => (
                                                 <li key={index} className="flex items-start space-x-2 space-x-reverse">
                                                     <div className="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
-                                                    <span>{strength}</span>
+                                                    <EditableText 
+                                                        initialValue={strength}
+                                                        storageKey={`nvidia-strength-${index}`}
+                                                        className="inline"
+                                                    />
                                                 </li>
                                             ))}
                                         </ul>
@@ -233,13 +279,21 @@ export default function MicrosoftNvidiaComparison() {
                                     <div>
                                         <h4 className="font-medium text-red-700 mb-3 flex items-center">
                                             <XCircle className="h-4 w-4 ml-1" />
-                                            חסרונות וסיכונים
+                                            <EditableText 
+                                              initialValue="חסרונות וסיכונים"
+                                              storageKey="nvidia-weaknesses-title"
+                                              className="inline"
+                                            />
                                         </h4>
                                         <ul className="text-sm space-y-2">
                                             {comparisonData.nvidia.weaknesses.map((weakness, index) => (
                                                 <li key={index} className="flex items-start space-x-2 space-x-reverse">
                                                     <div className="w-1.5 h-1.5 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
-                                                    <span>{weakness}</span>
+                                                    <EditableText 
+                                                        initialValue={weakness}
+                                                        storageKey={`nvidia-weakness-${index}`}
+                                                        className="inline"
+                                                    />
                                                 </li>
                                             ))}
                                         </ul>
@@ -253,17 +307,47 @@ export default function MicrosoftNvidiaComparison() {
                 <TabsContent value="technical" className="space-y-6">
                     <Card>
                         <CardHeader>
-                            <CardTitle>השוואה טכנית מפורטת</CardTitle>
-                            <CardDescription>מפרט טכני מלא של שני הפתרונות</CardDescription>
+                            <CardTitle>
+                                <EditableText 
+                                  initialValue="השוואה טכנית מפורטת"
+                                  storageKey="technical-comparison-title"
+                                  className="inline"
+                                />
+                            </CardTitle>
+                            <CardDescription>
+                                <EditableText 
+                                  initialValue="מפרט טכני מלא של שני הפתרונות"
+                                  storageKey="technical-comparison-description"
+                                  className="inline"
+                                />
+                            </CardDescription>
                         </CardHeader>
                         <CardContent>
                             <div className="overflow-x-auto">
                                 <table className="w-full text-sm">
                                     <thead>
                                         <tr className="border-b">
-                                            <th className="text-right py-3 px-4 font-semibold">תכונה טכנית</th>
-                                            <th className="text-center py-3 px-4 font-semibold text-blue-700">Microsoft Azure</th>
-                                            <th className="text-center py-3 px-4 font-semibold text-green-700">NVIDIA ACE</th>
+                                            <th className="text-right py-3 px-4 font-semibold">
+                                                <EditableText 
+                                                  initialValue="תכונה טכנית"
+                                                  storageKey="tech-table-header-feature"
+                                                  className="inline"
+                                                />
+                                            </th>
+                                            <th className="text-center py-3 px-4 font-semibold text-blue-700">
+                                                <EditableText 
+                                                  initialValue="Microsoft Azure"
+                                                  storageKey="tech-table-header-microsoft"
+                                                  className="inline"
+                                                />
+                                            </th>
+                                            <th className="text-center py-3 px-4 font-semibold text-green-700">
+                                                <EditableText 
+                                                  initialValue="NVIDIA ACE"
+                                                  storageKey="tech-table-header-nvidia"
+                                                  className="inline"
+                                                />
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y">
@@ -284,13 +368,37 @@ export default function MicrosoftNvidiaComparison() {
                                         </tr>
                                         <tr>
                                             <td className="py-3 px-4 font-medium">פריסה</td>
-                                            <td className="py-3 px-4 text-center">{comparisonData.microsoft.technicalSpecs.deployment}</td>
-                                            <td className="py-3 px-4 text-center">{comparisonData.nvidia.technicalSpecs.deployment}</td>
+                                            <td className="py-3 px-4 text-center">
+                                                <EditableText 
+                                                    initialValue={comparisonData.microsoft.technicalSpecs.deployment}
+                                                    storageKey="microsoft-deployment"
+                                                    className="inline text-center"
+                                                />
+                                            </td>
+                                            <td className="py-3 px-4 text-center">
+                                                <EditableText 
+                                                    initialValue={comparisonData.nvidia.technicalSpecs.deployment}
+                                                    storageKey="nvidia-deployment"
+                                                    className="inline text-center"
+                                                />
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td className="py-3 px-4 font-medium">אינטגרציה</td>
-                                            <td className="py-3 px-4 text-center">{comparisonData.microsoft.technicalSpecs.integration}</td>
-                                            <td className="py-3 px-4 text-center">{comparisonData.nvidia.technicalSpecs.integration}</td>
+                                            <td className="py-3 px-4 text-center">
+                                                <EditableText 
+                                                    initialValue={comparisonData.microsoft.technicalSpecs.integration}
+                                                    storageKey="microsoft-integration"
+                                                    className="inline text-center"
+                                                />
+                                            </td>
+                                            <td className="py-3 px-4 text-center">
+                                                <EditableText 
+                                                    initialValue={comparisonData.nvidia.technicalSpecs.integration}
+                                                    storageKey="nvidia-integration"
+                                                    className="inline text-center"
+                                                />
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td className="py-3 px-4 font-medium">מודל עסקי</td>
