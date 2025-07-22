@@ -2,6 +2,7 @@ import { ContentManagerInterface, EditableContent } from '@/lib/types/inline-edi
 
 const STORAGE_PREFIX = 'inline-edit-'
 const CHANGES_KEY = 'inline-edit-changes'
+const EDITING_LOCKED_KEY = 'inline-edit-locked'
 
 export class ContentManager implements ContentManagerInterface {
   private static instance: ContentManager
@@ -174,6 +175,42 @@ export class ContentManager implements ContentManagerInterface {
       return this.memoryFallback.size > 0
     } catch {
       return this.memoryFallback.size > 0
+    }
+  }
+
+  setEditingLocked(locked: boolean): void {
+    try {
+      if (this.isLocalStorageAvailable) {
+        if (locked) {
+          localStorage.setItem(EDITING_LOCKED_KEY, 'true')
+        } else {
+          localStorage.removeItem(EDITING_LOCKED_KEY)
+        }
+      } else {
+        if (locked) {
+          this.memoryFallback.set(EDITING_LOCKED_KEY, true)
+        } else {
+          this.memoryFallback.delete(EDITING_LOCKED_KEY)
+        }
+      }
+    } catch (error) {
+      console.warn('Failed to update editing lock status:', error)
+      if (locked) {
+        this.memoryFallback.set(EDITING_LOCKED_KEY, true)
+      } else {
+        this.memoryFallback.delete(EDITING_LOCKED_KEY)
+      }
+    }
+  }
+
+  isEditingLocked(): boolean {
+    try {
+      if (this.isLocalStorageAvailable) {
+        return localStorage.getItem(EDITING_LOCKED_KEY) === 'true'
+      }
+      return this.memoryFallback.has(EDITING_LOCKED_KEY)
+    } catch {
+      return this.memoryFallback.has(EDITING_LOCKED_KEY)
     }
   }
 

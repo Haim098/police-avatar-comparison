@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils'
 import { useInlineEdit } from '@/hooks/use-inline-edit'
 import { EditableNumberProps } from '@/lib/types/inline-editing'
 import { EditingErrorBoundary, DefaultEditingErrorFallback } from './editing-error-boundary'
+import { contentManager } from '@/lib/services/content-manager'
 
 const EditableNumberComponent = memo(function EditableNumber({
   initialValue,
@@ -60,6 +61,11 @@ const EditableNumberComponent = memo(function EditableNumber({
   }, [isEditing])
 
   const handleStartEdit = () => {
+    // Check if editing is locked
+    if (contentManager.isEditingLocked()) {
+      return
+    }
+    
     setInputValue(value.toString())
     setValidationError(null)
     startEdit()
@@ -191,6 +197,8 @@ const EditableNumberComponent = memo(function EditableNumber({
     )
   }
 
+  const isLocked = contentManager.isEditingLocked()
+
   return (
     <span
       onClick={handleStartEdit}
@@ -200,9 +208,13 @@ const EditableNumberComponent = memo(function EditableNumber({
           handleStartEdit()
         }
       }}
-      tabIndex={0}
+      tabIndex={isLocked ? -1 : 0}
       role="button"
-      aria-label={`מספר ניתן לעריכה: ${displayValue}. לחץ Enter או רווח לעריכה`}
+      aria-label={
+        isLocked 
+          ? `מספר נעול: ${displayValue}. העריכה כרגע נעולה`
+          : `מספר ניתן לעריכה: ${displayValue}. לחץ Enter או רווח לעריכה`
+      }
       aria-describedby={`${storageKey}-instructions`}
       aria-live="polite"
       aria-atomic="true"
@@ -210,13 +222,16 @@ const EditableNumberComponent = memo(function EditableNumber({
         "editable-element edit-transition",
         "inline-block min-w-[40px] px-2 py-1 rounded text-center",
         hasChanges && "has-changes",
+        isLocked && "editing-locked",
         className
       )}
     >
       {displayValue}
-      <div className="edit-tooltip">
-        לחץ לעריכה • ↑↓ לשינוי • Enter לשמירה
-      </div>
+      {!isLocked && (
+        <div className="edit-tooltip">
+          לחץ לעריכה • ↑↓ לשינוי • Enter לשמירה
+        </div>
+      )}
     </span>
   )
 })

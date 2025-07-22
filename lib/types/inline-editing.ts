@@ -64,6 +64,8 @@ export interface ContentManagerInterface {
   importAll(data: Record<string, any>): void
   resetAll(): void
   hasChanges(): boolean
+  setEditingLocked(locked: boolean): void
+  isEditingLocked(): boolean
 }
 
 export interface EditingErrorBoundaryProps {

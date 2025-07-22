@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { 
   Dialog, 
@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/dialog'
 import { toast } from 'sonner'
 import { contentManager } from '@/lib/services/content-manager'
-import { Download, RotateCcw, Save, AlertTriangle } from 'lucide-react'
+import { Download, RotateCcw, Save, AlertTriangle, Lock, Unlock } from 'lucide-react'
 
 interface ContentControlsProps {
   className?: string
@@ -23,8 +23,14 @@ export function ContentControls({ className }: ContentControlsProps) {
   const [isResetDialogOpen, setIsResetDialogOpen] = useState(false)
   const [isExporting, setIsExporting] = useState(false)
   const [isResetting, setIsResetting] = useState(false)
+  const [isEditingLocked, setIsEditingLocked] = useState(false)
 
   const hasChanges = contentManager.hasChanges()
+
+  // Load editing lock state on mount
+  useEffect(() => {
+    setIsEditingLocked(contentManager.isEditingLocked())
+  }, [])
 
   const handleExportChanges = async () => {
     try {
@@ -116,11 +122,41 @@ export function ContentControls({ className }: ContentControlsProps) {
     input.click()
   }
 
+  const handleToggleEditingLock = () => {
+    const newLockState = !isEditingLocked
+    contentManager.setEditingLocked(newLockState)
+    setIsEditingLocked(newLockState)
+    
+    toast.success(
+      newLockState ? 'העריכה נעולה' : 'העריכה פתוחה',
+      {
+        description: newLockState 
+          ? 'לא ניתן לערוך תוכן עד לביטול הנעילה'
+          : 'כעת ניתן לערוך תוכן על ידי לחיצה עליו'
+      }
+    )
+  }
+
   if (!hasChanges) {
     return (
       <div className={`flex items-center gap-2 text-sm text-gray-500 ${className}`}>
         <Save className="h-4 w-4" />
         <span>אין שינויים לשמירה</span>
+        
+        <Button
+          variant={isEditingLocked ? "default" : "outline"}
+          size="sm"
+          onClick={handleToggleEditingLock}
+          className={`flex items-center gap-1 ${
+            isEditingLocked 
+              ? "bg-red-600 hover:bg-red-700 text-white" 
+              : "text-green-600 hover:text-green-700 hover:bg-green-50"
+          }`}
+        >
+          {isEditingLocked ? <Lock className="h-4 w-4" /> : <Unlock className="h-4 w-4" />}
+          {isEditingLocked ? 'עריכה נעולה' : 'עריכה פתוחה'}
+        </Button>
+        
         <Button
           variant="outline"
           size="sm"
@@ -140,6 +176,20 @@ export function ContentControls({ className }: ContentControlsProps) {
         <AlertTriangle className="h-4 w-4" />
         <span>יש שינויים שלא נשמרו</span>
       </div>
+      
+      <Button
+        variant={isEditingLocked ? "default" : "outline"}
+        size="sm"
+        onClick={handleToggleEditingLock}
+        className={`flex items-center gap-1 ${
+          isEditingLocked 
+            ? "bg-red-600 hover:bg-red-700 text-white" 
+            : "text-green-600 hover:text-green-700 hover:bg-green-50"
+        }`}
+      >
+        {isEditingLocked ? <Lock className="h-4 w-4" /> : <Unlock className="h-4 w-4" />}
+        {isEditingLocked ? 'עריכה נעולה' : 'עריכה פתוחה'}
+      </Button>
       
       <Button
         variant="outline"

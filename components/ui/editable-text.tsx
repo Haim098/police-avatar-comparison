@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils'
 import { useInlineEdit } from '@/hooks/use-inline-edit'
 import { EditableTextProps } from '@/lib/types/inline-editing'
 import { EditingErrorBoundary, DefaultEditingErrorFallback } from './editing-error-boundary'
+import { contentManager } from '@/lib/services/content-manager'
 
 const EditableTextComponent = memo(function EditableText({
   initialValue,
@@ -42,6 +43,11 @@ const EditableTextComponent = memo(function EditableText({
   }, [isEditing])
 
   const handleStartEdit = () => {
+    // Check if editing is locked
+    if (contentManager.isEditingLocked()) {
+      return
+    }
+    
     setInputValue(value || initialValue)
     setValidationError(null)
     startEdit()
@@ -155,6 +161,8 @@ const EditableTextComponent = memo(function EditableText({
     )
   }
 
+  const isLocked = contentManager.isEditingLocked()
+
   return (
     <span
       onClick={handleStartEdit}
@@ -164,9 +172,13 @@ const EditableTextComponent = memo(function EditableText({
           handleStartEdit()
         }
       }}
-      tabIndex={0}
+      tabIndex={isLocked ? -1 : 0}
       role="button"
-      aria-label={`טקסט ניתן לעריכה: ${displayValue}. לחץ Enter או רווח לעריכה`}
+      aria-label={
+        isLocked 
+          ? `טקסט נעול: ${displayValue}. העריכה כרגע נעולה`
+          : `טקסט ניתן לעריכה: ${displayValue}. לחץ Enter או רווח לעריכה`
+      }
       aria-describedby={`${storageKey}-instructions`}
       aria-live="polite"
       aria-atomic="true"
@@ -175,13 +187,16 @@ const EditableTextComponent = memo(function EditableText({
         "inline-block min-w-[50px] px-2 py-1 rounded",
         hasChanges && "has-changes",
         isEmpty && "text-gray-400 italic",
+        isLocked && "editing-locked",
         className
       )}
     >
       {displayValue}
-      <div className="edit-tooltip">
-        לחץ לעריכה • Enter לשמירה • Esc לביטול
-      </div>
+      {!isLocked && (
+        <div className="edit-tooltip">
+          לחץ לעריכה • Enter לשמירה • Esc לביטול
+        </div>
+      )}
     </span>
   )
 })

@@ -19,7 +19,7 @@ const initialCompaniesData = {
     security: "SOC 2, GDPR, ISO 27001/27017/27018",
     languages: "עברית, ערבית, רוסית, אנגלית; אמהרית מוגבלת",
     model: "Digital Brain פנימי (מוח דיגיטלי)",
-    pricing: "Basic: $12.99/Plus: $99/Pro: $2,700",
+    pricing: "Basic: $12.99\n(40 דקות שיחה אינטראקטיבית)\n\nPlus: $99\n(350 דקות, 3 אווטארים)\n\nPro: $2,700\n(10,000 דקות, 5 אווטארים)",
     support: "24/7 תמיכה, Email Support",
     pros: ["טכנולוגיה מתקדמת ביותר", "מוח דיגיטלי פנימי", "אינטראקציה טבעית מלאה"],
     cons: ["מחיר גבוה", "מורכבות גבוהה", "זמן הטמעה ארוך"],
@@ -31,7 +31,7 @@ const initialCompaniesData = {
     security: "GDPR, SOC 2 Type 2",
     languages: "עברית, ערבית, רוסית, אמהרית, אנגלית + 170 שפות",
     model: "דורש חיבור ל-LLM חיצוני",
-    pricing: "Free/Creator: $29/Team: $149/Enterprise מותאם",
+    pricing: "Free\n\nPro: $99\n(100 קרדיטים)\n\nScale: $330\n(660 קרדיטים)\n\nEnterprise: מותאם\n\n* קרדיט = 5 דקות שיחה אינטראקטיבית",
     support: "Priority Support ב-Enterprise",
     pros: ["תמיכה ב-170+ שפות", "קל לשימוש", "מחיר סביר"],
     cons: ["רק בענן", "תלות ב-LLM חיצוני", "פחות אבטחה"],
@@ -43,7 +43,7 @@ const initialCompaniesData = {
     security: "ISO 27001/27017/27018/42001, SOC 2",
     languages: "עברית, ערבית, רוסית, אנגלית + 30 שפות",
     model: "דורש חיבור ל-LLM חיצוני",
-    pricing: "Trial: חינם/Lite: $5.9/Pro: $16/Advanced: $108/Enterprise מותאם",
+    pricing: "Trial: חינם\n\nBuild: $18\n(אווטאר 1 מותאם ועד 32 דקות שיחה)\n\nLaunch: $50\n(3 אווטארים מותאמים ועד 90 דקות שיחה)\n\nScale: $198\n\nEnterprise: מותאם",
     support: "24/7 Support, SLA Enterprise",
     pros: ["מחיר תחרותי", "תמיכה בעברית מלאה", "אבטחה טובה"],
     cons: ["תלות ב-LLM חיצוני", "פחות תכונות מתקדמות", "מוגבל בהתאמות"],
@@ -55,7 +55,7 @@ const initialCompaniesData = {
     security: "SOC 2 Type 2, GDPR, ISO 27001/42001",
     languages: "עברית, ערבית, רוסית, אנגלית",
     model: "Synapse פנימי + LLM מותאם",
-    pricing: "Enterprise: $240,000/שנה",
+    pricing: "Enterprise: $240,000/שנה\n\n* לא מפורט בבירור באתר שלהם\n* באתר של AWS מופיע התמחור הנ\"ל לאווטאר של UneeQ הפרוס על הענן שלהם\n* יש לאמת מול החברה!",
     support: "24/7 SLA, Implementation Services",
     pros: ["מערכת Synapse מתקדמת", "תמיכה מלאה", "אבטחה גבוהה"],
     cons: ["מחיר גבוה מאוד", "מיועד לארגונים גדולים", "מורכבות גבוהה"],
@@ -67,7 +67,7 @@ const initialCompaniesData = {
     security: "GDPR, AI Act",
     languages: "עברית, ערבית, רוסית, אנגלית, אמהרית",
     model: "דורש חיבור ל-LLM חיצוני",
-    pricing: "Starter: $19/Basic: $199/Business: $499/Enterprise מותאם",
+    pricing: "Starter: $19\n(אווטאר 1, 150 דקות שיחה)\n\nBasic: $199\n(אווטאר 1, 1900 דקות שיחה)\n\nBusiness: $499\n(4 אווטארים, 5000 דקות)\n\nCorporate: $999\n(8 אווטארים כולל פריסה מקומית, 10,000 דקות)\n\nEnterprise: מותאם\n(כולל פריסה מקומית)",
     support: "Email, Account Manager",
     pros: ["מחיר סביר", "תמיכה בכל השפות הנדרשות", "פריסה מקומית"],
     cons: ["תלות ב-LLM חיצוני", "פחות מוכר", "תמיכה מוגבלת"],
@@ -374,16 +374,16 @@ export default function SaasComparison() {
                     <div>
                       <h4 className="font-medium text-gray-700 mb-1">
                         <EditableText 
-                          initialValue="תמחור חודשי:"
+                          initialValue="תמחור מלא:"
                           storageKey={`${key}-pricing-label`}
                           className="inline"
                         />
                       </h4>
-                      <div className="text-sm bg-gray-50 p-2 rounded">
+                      <div className="text-sm bg-gray-50 p-2 rounded whitespace-pre-line">
                         <EditableText 
                           initialValue={company.pricing}
                           storageKey={`${key}-pricing-value`}
-                          className="inline text-sm"
+                          className="inline text-sm whitespace-pre-line"
                           multiline={true}
                         />
                       </div>

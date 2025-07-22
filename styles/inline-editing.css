@@ -183,6 +183,41 @@
   }
 }
 
+/* Locked editing state */
+.editing-locked {
+  @apply cursor-default;
+  position: static !important;
+}
+
+/* Remove all hover effects when locked */
+.editing-locked:hover {
+  @apply bg-transparent border-transparent;
+}
+
+.editing-locked::before {
+  display: none !important;
+}
+
+.editing-locked:hover::before {
+  display: none !important;
+}
+
+.editing-locked:focus::before {
+  display: none !important;
+}
+
+.editing-locked .edit-tooltip {
+  display: none !important;
+}
+
+/* Remove any visual indication that this is editable when locked */
+.editing-locked {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   .edit-transition,
